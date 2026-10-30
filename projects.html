@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects | Neha Paswan</title>
+<meta name="description" content="Projects by Neha Paswan: Verity, Vigil, voice agents, Bug Tracker and CloudSentinel.">
+<meta name="theme-color" content="#0A0B12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+<div class="wrap">
+<header class="t nav">
+  <a class="brand" href="index.html">Neha Paswan</a>
+  <nav class="navlinks" aria-label="Main">
+    <a href="index.html">Home</a><a href="projects.html" aria-current="page">Projects</a><a href="about.html">About</a><a class="gh" href="https://github.com/Neira053" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </nav>
+</header>
+  <main class="grid">
+    <section class="t intro s12">
+      <span class="cap muted">Projects</span>
+      <h1>Things I have built</h1>
+      <p class="lede muted" style="max-width:60ch">Each project has a short case study: what it does, how it works, what I measured and what I fixed along the way.</p>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" class="chipbtn on" data-f="all">All</button>
+        <button type="button" class="chipbtn" data-f="ai">AI &amp; agents</button>
+        <button type="button" class="chipbtn" data-f="web">Web apps</button>
+      </div>
+    </section>
+    <article class="t lav s6" data-cat="ai web">
+      <a class="cover" href="verity.html" aria-label="Verity case study"></a>
+      <div class="top"><h3>Verity</h3><span class="state">Live</span></div>
+      <p>A retrieval-augmented document chatbot that grew into a tool-using agent.</p>
+      <div class="tags"><span class="tag">React</span><span class="tag">Express</span><span class="tag">Gemini</span><span class="tag">Pinecone</span><span class="tag">Redis</span></div>
+      <div class="kvs"><span class="kv"><b>5</b>MCP tools</span><span class="kv"><b>BM25 + dense</b>retrieval</span><span class="kv"><b>SSE</b>streaming</span></div>
+      <ul><li>Hybrid BM25 and semantic retrieval with MMR reranking and an automated groundedness check on every answer. JWT auth.</li><li>Custom MCP server with multi-step reasoning, live tracing and a human approval gate before destructive actions.</li><li>Redis-backed memory and caching. Fixed a multi-tenant session-isolation bug that leaked data across users.</li></ul>
+      <div class="tlinks"><a href="https://rag-chatbot-eight-gamma.vercel.app" target="_blank" rel="noopener">Live demo &#8599;</a><a href="https://github.com/Neira053/rag-chatbot" target="_blank" rel="noopener">Source &#8599;</a><a href="verity.html">Case study &rarr;</a></div>
+    </article>
+    <article class="t mint s6" data-cat="ai">
+      <a class="cover" href="vigil.html" aria-label="Vigil case study"></a>
+      <div class="top"><h3>Vigil</h3><span class="state">Live</span></div>
+      <p>An observable RAG pipeline built to be measured, so every claim comes from a test or an eval run.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">pytest</span></div>
+      <div class="kvs"><span class="kv"><b>79%</b>recall@5</span><span class="kv"><b>~1 ms</b>cache hit</span></div>
+      <ul><li>14-query retrieval eval (11 answerable, 3 out of scope). Misses traced to TF-IDF failing on synonyms.</li><li>Fixed a bug that cached failed LLM calls and locked it in with a regression test.</li><li>Rate limiting blocks the 21st request in a minute.</li></ul>
+      <div class="tlinks"><a href="https://rag-playground-2m6g.onrender.com/" target="_blank" rel="noopener">Live demo &#8599;</a><a href="https://github.com/Neira053/Rag-Playground" target="_blank" rel="noopener">Source &#8599;</a><a href="vigil.html">Case study &rarr;</a></div>
+    </article>
+    <article class="t rose s4" data-cat="ai">
+      <a class="cover" href="voice-agents.html" aria-label="Ananya &amp; Prakriti case study"></a>
+      <div class="top"><h3>Ananya &amp; Prakriti</h3></div>
+      <p>Two voice agents I built on Sarvam AI: Ananya handles car-insurance renewal and Prakriti handles loan settlement.</p>
+      <div class="tags"><span class="tag">Sarvam Indus</span><span class="tag">Samvaad</span><span class="tag">Voice agents</span></div>
+      <div class="kvs"><span class="kv"><b>2</b>voice agents</span></div>
+      <ul><li>Built both agents on Sarvam Indus (Samvaad), including the instruction scripts that set each agent's goal, tone, branching and hand-offs.</li><li>Migrating both to a new profile on the same platform.</li></ul>
+      <div class="tlinks"><a href="voice-agents.html">Case study &rarr;</a></div>
+    </article>
+    <article class="t peach s4" data-cat="web">
+      <a class="cover" href="bug-tracker.html" aria-label="Bug Tracker case study"></a>
+      <div class="top"><h3>Bug Tracker</h3><span class="state">Live</span></div>
+      <p>Manage bugs across projects, with a different view for each person on the team.</p>
+      <div class="tags"><span class="tag">Next.js</span><span class="tag">Vercel</span></div>
+      <div class="kvs"><span class="kv"><b>3</b>roles</span></div>
+      <ul><li>Role-based access for admins, testers and developers.</li><li>Shared bug-status tracking, analytics dashboards and status reports.</li></ul>
+      <div class="tlinks"><a href="https://bug-tracker-frontend-one-alpha.vercel.app/" target="_blank" rel="noopener">Live demo &#8599;</a><a href="bug-tracker.html">Case study &rarr;</a></div>
+    </article>
+    <article class="t sky s4" data-cat="web">
+      <a class="cover" href="cloudsentinel.html" aria-label="CloudSentinel case study"></a>
+      <div class="top"><h3>CloudSentinel</h3><span class="state">Live</span></div>
+      <p>A dashboard for keeping an eye on the security of an AWS account.</p>
+      <div class="tags"><span class="tag">AWS</span><span class="tag">Vercel</span></div>
+      
+      
+      <div class="tlinks"><a href="https://cloud-sentinel-d9ga.vercel.app/" target="_blank" rel="noopener">Live demo &#8599;</a><a href="cloudsentinel.html">Case study &rarr;</a></div>
+    </article>
+    <section class="t grad contact s12" id="contact">
+      <span class="cap muted">Contact</span>
+      <h3>Hiring for an AI or software role?</h3>
+      <p style="max-width:58ch" class="muted">I am looking for early-career SDE, AI engineer and forward deployed engineer roles in Delhi, Noida, Gurugram or remote. Email or LinkedIn is the fastest way to reach me.</p>
+      <div class="mailrow">
+        <code id="mail">nehapaswan2806@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy address</button>
+        <span class="copied" id="copied" role="status"></span>
+      </div>
+      <div class="links">
+        <a class="btn solid" href="https://www.linkedin.com/in/neha-paswan-8242b4261" target="_blank" rel="noopener">Message on LinkedIn &#8599;</a>
+        <a class="btn" href="https://github.com/Neira053" target="_blank" rel="noopener">See the code &#8599;</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span class="cap">Neha Paswan</span>
+    <span class="cap">Last updated Oct 2026</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>

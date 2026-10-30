@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vigil | Neha Paswan</title>
+<meta name="description" content="Vigil: an observable RAG pipeline with caching, guardrails, rate limiting, tracing and a recall@k eval harness.">
+<meta name="theme-color" content="#0A0B12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+<div class="wrap">
+<header class="t nav">
+  <a class="brand" href="index.html">Neha Paswan</a>
+  <nav class="navlinks" aria-label="Main">
+    <a href="index.html">Home</a><a href="projects.html" aria-current="page">Projects</a><a href="about.html">About</a><a class="gh" href="https://github.com/Neira053" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </nav>
+</header>
+  <main class="grid">
+    <section class="t mint pagehead s12">
+      <a class="crumb" href="projects.html">&larr; All projects</a>
+      <div class="top"><h1>Vigil</h1><span class="state">Live</span></div>
+      <p class="lede">An observable RAG pipeline built to be measured, so every claim comes from a test or an eval run.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">pytest</span></div>
+      <div class="links"><a class="btn solid" href="https://rag-playground-2m6g.onrender.com/" target="_blank" rel="noopener">Live demo &#8599;</a><a class="btn" href="https://github.com/Neira053/Rag-Playground" target="_blank" rel="noopener">Source code &#8599;</a></div>
+      
+    </section>
+    <div class="t butter stat s3"><span class="cap">Retrieval recall@5</span><b data-to="79" data-suffix="%">79%</b><span>on a 14-query eval</span></div>
+    <div class="t mint stat s3"><span class="cap">pytest tests</span><b data-to="23">23</b><span>guardrails to full pipeline</span></div>
+    <div class="t peach stat s3"><span class="cap">Cache hit</span><b>~1 ms</b><span>after the first request</span></div>
+    <div class="t sky stat s3"><span class="cap">Request blocked</span><b>21st</b><span>by the rate limiter per minute</span></div>
+    <section class="t  s7">
+      <span class="cap muted">Overview</span>
+      <h3>What it is</h3>
+      <p>Vigil answers questions over a sample engineering handbook (deployment, incident response, coding standards, on-call, security policy). The point is the engineering around the model call: caching, retries, guardrails, rate limiting, cost tracking and per-stage tracing, with an eval harness to measure retrieval instead of guessing.</p><p>A terminal-style dashboard shows request volume, latency, cache hit rate, token and cost estimates, error rate, retrieval recall and a per-stage waterfall for the latest request.</p>
+    </section>
+    <section class="t  s5">
+      <span class="cap muted">Built with</span>
+      <h3>Stack</h3>
+      <div class="stack"><span>Python</span><span>FastAPI</span><span>uvicorn</span><span>TF-IDF</span><span>Redis</span><span>Gemini</span><span>pytest</span></div>
+    </section>
+    <section class="t  s12">
+      <span class="cap muted">How a request flows</span>
+      <h3>Request path</h3>
+      <div class="stepper" data-stepper>
+<div class="steps" role="tablist"><button class="step" type="button" role="tab" data-t="API" data-d="FastAPI receives the request. API-key auth and a sliding-window rate limiter run first, so the 21st request in a minute is blocked."><i>1</i><span>API</span></button><button class="step" type="button" role="tab" data-t="Cache" data-d="Redis cache, with an in-memory fallback if Redis is not running. A cache hit comes back in about 1 ms."><i>2</i><span>Cache</span></button><button class="step" type="button" role="tab" data-t="Retrieve" data-d="TF-IDF vector store with cosine similarity, fully offline. A minimum similarity threshold drops weak matches."><i>3</i><span>Retrieve</span></button><button class="step" type="button" role="tab" data-t="Rerank" data-d="Blends lexical and vector scores. No second model."><i>4</i><span>Rerank</span></button><button class="step" type="button" role="tab" data-t="LLM" data-d="Gemini with retries and a timeout. With no API key it runs in mock mode so every other stage still works."><i>5</i><span>LLM</span></button><button class="step" type="button" role="tab" data-t="Guardrails" data-d="Checks for PII, prompt injection and groundedness."><i>6</i><span>Guardrails</span></button><button class="step" type="button" role="tab" data-t="Trace" data-d="Metrics and per-stage timings are stored and a trace_id is returned, so the dashboard can draw a waterfall."><i>7</i><span>Trace</span></button></div>
+<div class="panel" aria-live="polite"><h4 class="ptitle"></h4><p class="pbody"></p></div>
+<button class="btn play" type="button">&#9654; Play the request</button>
+</div>
+    </section>
+    <section class="t  s6">
+      <span class="cap muted">Measured, not claimed</span>
+      <h3>What the eval showed</h3>
+      <p>Recall@5 is about 79% on a 14-query labeled set: 11 answerable questions, including paraphrases, and 3 out of scope. The misses are mostly synonym gaps, for example "text-message-verify" against "SMS-based MFA", which TF-IDF cannot bridge. One out-of-scope question ("parental leave policy") still returns a false positive.</p>
+    </section>
+    <section class="t  s6">
+      <span class="cap muted">Problem I fixed</span>
+      <h3>A bug the tests caught</h3>
+      <p>Failed LLM calls were being cached, so one bad response kept being served. I fixed it so errors are never cached and added a regression test that fails if it comes back.</p>
+    </section>
+    <section class="t  s6">
+      <span class="cap muted">Why it is built this way</span>
+      <h3>Design choices</h3>
+      <ul><li>No model downloads: TF-IDF runs fully offline.</li><li>Mock mode by default, so every other stage still runs without an API key.</li><li>A minimum similarity threshold drops weak matches before reranking.</li><li>Cache falls back to memory when Redis is not running.</li></ul>
+    </section>
+    <section class="t  s6">
+      <span class="cap muted">Honest limits</span>
+      <h3>Known limits and next steps</h3>
+      <ul><li>No streaming and no multi-turn memory yet.</li><li>The reranker's benefit is asserted, not measured.</li><li>Next: real embeddings and a vector database, a cross-encoder with a before and after comparison, CI that runs pytest and the eval on every PR.</li></ul>
+    </section>
+    <section class="t  s12">
+      <span class="cap muted">Endpoints</span>
+      <h3>API</h3>
+      <ul class="rows"><li><code>POST /ask</code><span class="muted">Runs the full pipeline (needs an API key header).</span></li><li><code>GET /metrics</code><span class="muted">Aggregate stats.</span></li><li><code>GET /trace/latest</code><span class="muted">Per-stage timings for the latest request.</span></li><li><code>GET /trace/{id}</code><span class="muted">Look up a past request.</span></li><li><code>POST /eval</code><span class="muted">Runs the eval set and reports recall@k.</span></li><li><code>POST /reindex</code><span class="muted">Rebuilds the index (auth required).</span></li><li><code>GET /health</code><span class="muted">Mode, cache backend and index size.</span></li></ul>
+    </section>
+    <a class="t rose nextp s12" href="voice-agents.html" style="text-decoration:none"><div><span class="cap muted">Next project</span><h3>Ananya &amp; Prakriti</h3></div><span class="btn solid">View case study &rarr;</span></a>
+    <section class="t grad contact s12" id="contact">
+      <span class="cap muted">Contact</span>
+      <h3>Hiring for an AI or software role?</h3>
+      <p style="max-width:58ch" class="muted">I am looking for early-career SDE, AI engineer and forward deployed engineer roles in Delhi, Noida, Gurugram or remote. Email or LinkedIn is the fastest way to reach me.</p>
+      <div class="mailrow">
+        <code id="mail">nehapaswan2806@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy address</button>
+        <span class="copied" id="copied" role="status"></span>
+      </div>
+      <div class="links">
+        <a class="btn solid" href="https://www.linkedin.com/in/neha-paswan-8242b4261" target="_blank" rel="noopener">Message on LinkedIn &#8599;</a>
+        <a class="btn" href="https://github.com/Neira053" target="_blank" rel="noopener">See the code &#8599;</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span class="cap">Neha Paswan</span>
+    <span class="cap">Last updated Oct 2026</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verity | Neha Paswan</title>
+<meta name="description" content="Verity: a RAG document chatbot with hybrid retrieval, an MCP tool server, tracing and a human approval gate.">
+<meta name="theme-color" content="#0A0B12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+<div class="wrap">
+<header class="t nav">
+  <a class="brand" href="index.html">Neha Paswan</a>
+  <nav class="navlinks" aria-label="Main">
+    <a href="index.html">Home</a><a href="projects.html" aria-current="page">Projects</a><a href="about.html">About</a><a class="gh" href="https://github.com/Neira053" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </nav>
+</header>
+  <main class="grid">
+    <section class="t lav pagehead s12">
+      <a class="crumb" href="projects.html">&larr; All projects</a>
+      <div class="top"><h1>Verity</h1><span class="state">Live</span></div>
+      <p class="lede">A retrieval-augmented document chatbot that grew into a tool-using agent.</p>
+      <div class="tags"><span class="tag">React</span><span class="tag">Express</span><span class="tag">Gemini</span><span class="tag">Pinecone</span><span class="tag">Redis</span></div>
+      <div class="links"><a class="btn solid" href="https://rag-chatbot-eight-gamma.vercel.app" target="_blank" rel="noopener">Live demo &#8599;</a><a class="btn" href="https://github.com/Neira053/rag-chatbot" target="_blank" rel="noopener">Source code &#8599;</a></div>
+      
+    </section>
+    <div class="t butter stat s3"><span class="cap">MCP tools</span><b data-to="5">5</b><span>on a custom MCP server</span></div>
+    <div class="t mint stat s3"><span class="cap">Reranking</span><b>MMR</b><span>for varied, relevant context</span></div>
+    <div class="t sky stat s3"><span class="cap">Auth</span><b>JWT</b><span>with isolated sessions</span></div>
+    <div class="t peach stat s3"><span class="cap">Streaming</span><b>SSE</b><span>answers arrive as they are written</span></div>
+    <section class="t  s7">
+      <span class="cap muted">Overview</span>
+      <h3>What it is</h3>
+      <p>Verity started as a chatbot that answers questions from documents and became an agent that can also use tools. It answers from retrieved passages, checks its own answers against them, and asks a person before it does anything destructive.</p>
+    </section>
+    <section class="t  s5">
+      <span class="cap muted">Built with</span>
+      <h3>Stack</h3>
+      <div class="stack"><span>React</span><span>Express</span><span>Node.js</span><span>Gemini</span><span>Pinecone</span><span>Redis</span><span>MCP</span><span>JWT</span><span>SSE</span></div>
+    </section>
+    <section class="t  s12">
+      <span class="cap muted">How an answer is produced</span>
+      <h3>Question to answer</h3>
+      <div class="stepper" data-stepper>
+<div class="steps" role="tablist"><button class="step" type="button" role="tab" data-t="Hybrid retrieval" data-d="BM25 keyword search combined with semantic search over Pinecone."><i>1</i><span>Hybrid retrieval</span></button><button class="step" type="button" role="tab" data-t="MMR reranking" data-d="Picks passages that are relevant and not repetitive."><i>2</i><span>MMR reranking</span></button><button class="step" type="button" role="tab" data-t="Gemini answer" data-d="Written from the retrieved passages and streamed over SSE."><i>3</i><span>Gemini answer</span></button><button class="step" type="button" role="tab" data-t="Groundedness check" data-d="Every answer is checked automatically against its sources."><i>4</i><span>Groundedness check</span></button></div>
+<div class="panel" aria-live="polite"><h4 class="ptitle"></h4><p class="pbody"></p></div>
+<button class="btn play" type="button">&#9654; Play an answer</button>
+</div>
+    </section>
+    <section class="t  s12">
+      <span class="cap muted">How it acts</span>
+      <h3>Agent mode</h3>
+      <div class="stepper" data-stepper>
+<div class="steps" role="tablist"><button class="step" type="button" role="tab" data-t="MCP server" data-d="A custom server exposes 5 tools the model can call."><i>1</i><span>MCP server</span></button><button class="step" type="button" role="tab" data-t="Multi-step reasoning" data-d="The agent chains tool calls to finish a task."><i>2</i><span>Multi-step reasoning</span></button><button class="step" type="button" role="tab" data-t="Live tracing" data-d="Each step is traced so I can see what it did and why."><i>3</i><span>Live tracing</span></button><button class="step" type="button" role="tab" data-t="Approval gate" data-d="Destructive actions wait for a human to approve."><i>4</i><span>Approval gate</span></button></div>
+<div class="panel" aria-live="polite"><h4 class="ptitle"></h4><p class="pbody"></p></div>
+<button class="btn play" type="button">&#9654; Play a task</button>
+</div>
+    </section>
+    <section class="t  s12">
+      <span class="cap muted">Problem I fixed</span>
+      <h3>A bug worth telling</h3>
+      <p>In a multi-tenant setup, one user's session data could leak into another user's. I fixed the isolation so each user's session stays separate, and memory and caching are backed by Redis.</p>
+    </section>
+    <a class="t mint nextp s12" href="vigil.html" style="text-decoration:none"><div><span class="cap muted">Next project</span><h3>Vigil</h3></div><span class="btn solid">View case study &rarr;</span></a>
+    <section class="t grad contact s12" id="contact">
+      <span class="cap muted">Contact</span>
+      <h3>Hiring for an AI or software role?</h3>
+      <p style="max-width:58ch" class="muted">I am looking for early-career SDE, AI engineer and forward deployed engineer roles in Delhi, Noida, Gurugram or remote. Email or LinkedIn is the fastest way to reach me.</p>
+      <div class="mailrow">
+        <code id="mail">nehapaswan2806@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy address</button>
+        <span class="copied" id="copied" role="status"></span>
+      </div>
+      <div class="links">
+        <a class="btn solid" href="https://www.linkedin.com/in/neha-paswan-8242b4261" target="_blank" rel="noopener">Message on LinkedIn &#8599;</a>
+        <a class="btn" href="https://github.com/Neira053" target="_blank" rel="noopener">See the code &#8599;</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span class="cap">Neha Paswan</span>
+    <span class="cap">Last updated Oct 2026</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>
